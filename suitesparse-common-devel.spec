@@ -1,7 +1,7 @@
 %define NAME	UFconfig
 %define name	suitesparse-common-devel
 %define version 3.1.0
-%define release %mkrel 2
+%define release %mkrel 3
 
 Summary: 	Configuration file for SuiteSparse packages
 Name: 		%{name}
@@ -14,6 +14,7 @@ Source0: 	http://www.cise.ufl.edu/research/sparse/UFconfig/%{NAME}-%{version}.ta
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-root
 BuildArch:	noarch
 Obsoletes:	suitesparse-common-devel < %{epoch}:%{version}-%{release}
+Obsoletes:	suitesparse-static-devel 
 Obsoletes:	ufsparse-common-devel < %{epoch}:%{version}-%{release}
 Provides:	ufsparse-common-devel = %{epoch}:%{version}-%{release}
 
