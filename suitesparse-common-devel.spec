@@ -1,7 +1,7 @@
 %define NAME	UFconfig
 %define name	suitesparse-common-devel
-%define version 3.1.0
-%define release %mkrel 6
+%define version 3.2.0
+%define release %mkrel 1
 
 Summary: 	Configuration file for SuiteSparse packages
 Name: 		%{name}
