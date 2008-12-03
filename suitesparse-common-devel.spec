@@ -1,7 +1,7 @@
 %define NAME	UFconfig
 %define name	suitesparse-common-devel
 %define version 3.2.0
-%define release %mkrel 1
+%define release %mkrel 2
 
 Summary: 	Configuration file for SuiteSparse packages
 Name: 		%{name}
@@ -31,6 +31,7 @@ packages in SuiteSparse.
 %__rm -rf %{buildroot}
 %__install -d -m 755 %{buildroot}/%{_includedir}/suitesparse
 %__install -m 644 *.h %{buildroot}/%{_includedir}/suitesparse
+%__install -m 644 *.mk %{buildroot}/%{_includedir}/suitesparse
 
 %clean
 %__rm -rf %{buildroot}
@@ -38,4 +39,4 @@ packages in SuiteSparse.
 %files
 %defattr(-,root,root)
 %doc README.txt
-%{_includedir}/suitesparse/*.h
+%{_includedir}/suitesparse/*.*
