@@ -1,42 +1,39 @@
-%define NAME	UFconfig
-%define name	suitesparse-common-devel
-%define version 3.6.1
-%define release %mkrel 1
+%define _enable_debug_packages %{nil}
+%define debug_package %{nil}
 
-Summary: 	Configuration file for SuiteSparse packages
-Name: 		%{name}
-Version: 	%{version}
-Release: 	%{release}
-License: 	LGPL
+%define NAME	SuiteSparse_config
+
+Summary:	Configuration file for SuiteSparse packages
+Name:		suitesparse-common-devel
+Version:	4.0.2
+Release:	2
+License:	LGPL
 Group:		Development/C
 Url:		http://www.cise.ufl.edu/research/sparse/UFconfig/
-Source0: 	http://www.cise.ufl.edu/research/sparse/UFconfig/%{NAME}-%{version}.tar.gz
-BuildRoot: 	%{_tmppath}/%{name}-%{version}-%{release}-root
-BuildArch:	noarch
-Obsoletes:	suitesparse-common-devel < %{version}-%{release}
-Obsoletes:	suitesparse-static-devel 
-Obsoletes:	ufsparse-common-devel < %{version}-%{release}
+Source0:	http://www.cise.ufl.edu/research/sparse/UFconfig/%{NAME}-%{version}.tar.gz
 Provides:	ufsparse-common-devel = %{version}-%{release}
 
 %description
-UFconfig provides a configuration header file needed by most of the other 
-packages in SuiteSparse.
+UFconfig provides a configuration header file needed by most of the other
+packages in SuiteSparse. And static library with few functions.
 
 %prep
 %setup -q -n %{NAME}
+chmod 0644 README.txt
 
 %build
+%make CF="%{optflags}"
 
 %install
-%__rm -rf %{buildroot}
-%__install -d -m 755 %{buildroot}/%{_includedir}/suitesparse
-%__install -m 644 *.h %{buildroot}/%{_includedir}/suitesparse
-%__install -m 644 *.mk %{buildroot}/%{_includedir}/suitesparse
+install -d -m 755 %{buildroot}/%{_includedir}/suitesparse
+install -m 644 *.h %{buildroot}/%{_includedir}/suitesparse
+install -m 644 *.mk %{buildroot}/%{_includedir}/suitesparse
 
-%clean
-%__rm -rf %{buildroot}
+install -d -m 755 %{buildroot}/%{_libdir}
+install -m 644 *.a %{buildroot}/%{_libdir}
 
 %files
-%defattr(-,root,root)
 %doc README.txt
 %{_includedir}/suitesparse/*.*
+%{_libdir}/*.a
+
