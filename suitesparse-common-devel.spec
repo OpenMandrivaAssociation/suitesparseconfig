@@ -5,8 +5,8 @@
 
 Summary:	Configuration file for SuiteSparse packages
 Name:		suitesparse-common-devel
-Version:	4.0.2
-Release:	2
+Version:	4.2.1
+Release:	1
 License:	LGPL
 Group:		Development/C
 Url:		http://www.cise.ufl.edu/research/sparse/UFconfig/
@@ -34,6 +34,6 @@ install -m 644 *.a %{buildroot}/%{_libdir}
 
 %files
 %doc README.txt
+%dir %{_includedir}/suitesparse/
 %{_includedir}/suitesparse/*.*
 %{_libdir}/*.a
-
