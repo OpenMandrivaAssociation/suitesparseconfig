@@ -1,7 +1,8 @@
-%define _enable_debug_packages %{nil}
-%define debug_package %{nil}
-
 %define NAME	SuiteSparse_config
+%define	oname	suitesparseconfig
+%define	major	4
+%define	libname	%mklibname %{oname} %{major}
+%define	devname	%mklibname -d %{oname}
 
 Summary:	Configuration file for SuiteSparse packages
 Name:		suitesparse-common-devel
@@ -18,24 +19,53 @@ Provides:	ufsparse-common-devel = %{version}-%{release}
 UFconfig provides a configuration header file needed by most of the other
 packages in SuiteSparse. And static library with few functions.
 
+%package -n	%{libname}
+Summary:	Configuration library for SuiteSparse packages
+Group:		System/Libraries
+
+%description -n %{libname}
+UFconfig provides a configuration header file needed by most of the other
+packages in SuiteSparse. And static library with few functions.
+
+%package -n	%{devname}
+Summary:	Configuration files for SuiteSparse packages
+Group:		Development/C
+%rename		%{name}
+
+%description -n %{devname}
+UFconfig provides a configuration header file needed by most of the other
+packages in SuiteSparse. And static library with few functions.
+
 %prep
 %setup -q -n %{NAME}
 %patch0 -p1 -b .opts~
 chmod 0644 README.txt
 
 %build
-%make CF="%{optflags}"
+%make CFLAGS="%{optflags}"
+ar x lib%{oname}.a
+gcc %{ldflags} -shared -Wl,-soname,lib%{oname}.so.%{major} -o \
+        lib%{oname}.so.%{version} *.o
 
 %install
-install -d -m 755 %{buildroot}/%{_includedir}/suitesparse
-install -m 644 *.h %{buildroot}/%{_includedir}/suitesparse
-install -m 644 *.mk %{buildroot}/%{_includedir}/suitesparse
+for f in *.so*; do
+    install -m755 $f -D %{buildroot}%{_libdir}/`basename $f`
+done
+for f in *.a; do
+    install -m644 $f -D %{buildroot}%{_libdir}/`basename $f`
+done
+for f in *.h *.mk; do
+    install -m644 $f -D %{buildroot}%{_includedir}/suitesparse/`basename $f`
+done
 
-install -d -m 755 %{buildroot}/%{_libdir}
-install -m 644 *.a %{buildroot}/%{_libdir}
+ln -s lib%{oname}.so.%{version} %{buildroot}%{_libdir}/lib%{oname}.so
 
-%files
+%files -n %{libname}
+%{_libdir}/lib%{oname}.so.%{major}*
+
+%files -n %{devname}
 %doc README.txt
 %dir %{_includedir}/suitesparse/
 %{_includedir}/suitesparse/*.*
-%{_libdir}/*.a
+%{_libdir}/lib%{oname}.so
+%{_libdir}/lib%{oname}.a
