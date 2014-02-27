@@ -39,7 +39,7 @@ packages in SuiteSparse. And static library with few functions.
 %prep
 %setup -q -n %{NAME}
 %patch0 -p1 -b .opts~
-chmod 0644 README.txt
+chmod -R o+r .
 
 %build
 %make CFLAGS="%{optflags}"
