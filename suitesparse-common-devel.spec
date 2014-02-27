@@ -6,11 +6,12 @@
 Summary:	Configuration file for SuiteSparse packages
 Name:		suitesparse-common-devel
 Version:	4.2.1
-Release:	1
+Release:	2
 License:	LGPL
 Group:		Development/C
 Url:		http://www.cise.ufl.edu/research/sparse/UFconfig/
 Source0:	http://www.cise.ufl.edu/research/sparse/UFconfig/%{NAME}-%{version}.tar.gz
+Patch0:		SuiteSparse_config-4.2.1-increase-default-optimizations.patch
 Provides:	ufsparse-common-devel = %{version}-%{release}
 
 %description
@@ -19,6 +20,7 @@ packages in SuiteSparse. And static library with few functions.
 
 %prep
 %setup -q -n %{NAME}
+%patch0 -p1 -b .opts~
 chmod 0644 README.txt
 
 %build
