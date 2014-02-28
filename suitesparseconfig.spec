@@ -6,7 +6,7 @@
 Summary:	Configuration file for SuiteSparse packages
 Name:		suitesparseconfig
 Version:	4.2.1
-Release:	3
+Release:	4
 License:	LGPLv2+
 Group:		Development/C
 Url:		http://www.cise.ufl.edu/research/sparse/UFconfig/
@@ -41,6 +41,12 @@ packages in SuiteSparse. And static library with few functions.
 %setup -q -n %{NAME}
 %patch0 -p1 -b .opts~
 chmod -R o+r .
+sed	-e 's#^INSTALL_LIB =.*#INSTALL_LIB = %{_libdir}#g' \
+	-e 's#^INSTALL_INCLUDE = .*#INSTALL_INCLUDE = %{_includedir}#g' \
+	-e 's#^TBB =.*#TBB = -ltbb#g' \
+	-e 's#^SQPR_CONFIG =.*#SQPR_CONFIG = DHAVE_TBB#g' \
+	-e 's#^METIS =.*#METIS = -lmetis#g' \
+	-i SuiteSparse_config.mk
 
 %build
 %make CFLAGS="%{optflags}"
