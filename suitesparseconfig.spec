@@ -12,7 +12,6 @@ Group:		Development/C
 Url:		http://www.cise.ufl.edu/research/sparse/UFconfig/
 Source0:	http://www.cise.ufl.edu/research/sparse/UFconfig/%{NAME}-%{version}.tar.gz
 Patch0:		SuiteSparse_config-4.2.1-increase-default-optimizations.patch
-Provides:	ufsparse-common-devel = %{version}-%{release}
 
 %description
 UFconfig provides a configuration header file needed by most of the other
@@ -32,6 +31,7 @@ Group:		Development/C
 Provides:	%{name}-devel = %{EVRD}
 Requires:	%{libname} = %{EVRD}
 %rename		suitesparse-common-devel
+Provides:	ufsparse-common-devel = %{EVRD}
 
 %description -n %{devname}
 UFconfig provides a configuration header file needed by most of the other
