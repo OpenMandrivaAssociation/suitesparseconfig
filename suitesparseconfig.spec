@@ -1,11 +1,10 @@
 %define NAME	SuiteSparse_config
-%define	oname	suitesparseconfig
 %define	major	4
-%define	libname	%mklibname %{oname} %{major}
-%define	devname	%mklibname -d %{oname}
+%define	libname	%mklibname %{name} %{major}
+%define	devname	%mklibname -d %{name}
 
 Summary:	Configuration file for SuiteSparse packages
-Name:		suitesparse-common-devel
+Name:		suitesparseconfig
 Version:	4.2.1
 Release:	3
 License:	LGPLv2+
@@ -30,9 +29,9 @@ packages in SuiteSparse. And static library with few functions.
 %package -n	%{devname}
 Summary:	Configuration files for SuiteSparse packages
 Group:		Development/C
-Provides:	%{oname}-devel = %{EVRD}
+Provides:	%{name}-devel = %{EVRD}
 Requires:	%{libname} = %{EVRD}
-%rename		%{name}
+%rename		suitesparse-common-devel
 
 %description -n %{devname}
 UFconfig provides a configuration header file needed by most of the other
@@ -45,9 +44,9 @@ chmod -R o+r .
 
 %build
 %make CFLAGS="%{optflags}"
-ar x lib%{oname}.a
-gcc %{ldflags} -shared -Wl,-soname,lib%{oname}.so.%{major} -o \
-        lib%{oname}.so.%{version} *.o
+ar x lib%{name}.a
+gcc %{ldflags} -shared -Wl,-soname,lib%{name}.so.%{major} -o \
+        lib%{name}.so.%{version} *.o
 
 %install
 for f in *.so*; do
@@ -60,14 +59,14 @@ for f in *.h *.mk; do
     install -m644 $f -D %{buildroot}%{_includedir}/suitesparse/`basename $f`
 done
 
-ln -s lib%{oname}.so.%{version} %{buildroot}%{_libdir}/lib%{oname}.so
+ln -s lib%{name}.so.%{version} %{buildroot}%{_libdir}/lib%{name}.so
 
 %files -n %{libname}
-%{_libdir}/lib%{oname}.so.%{major}*
+%{_libdir}/lib%{name}.so.%{major}*
 
 %files -n %{devname}
 %doc README.txt
 %dir %{_includedir}/suitesparse/
 %{_includedir}/suitesparse/*.*
-%{_libdir}/lib%{oname}.so
-%{_libdir}/lib%{oname}.a
+%{_libdir}/lib%{name}.so
+%{_libdir}/lib%{name}.a
