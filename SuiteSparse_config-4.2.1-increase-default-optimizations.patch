@@ -1,0 +1,11 @@
+--- SuiteSparse_config/SuiteSparse_config.mk~	2013-03-26 22:45:03.000000000 +0100
++++ SuiteSparse_config/SuiteSparse_config.mk	2014-02-27 22:13:54.908389901 +0100
+@@ -60,7 +60,7 @@
+ # C and C++ compiler flags.  The first three are standard for *.c and *.cpp
+ # Add -DNTIMER if you do use any timing routines (otherwise -lrt is required).
+ # CF = $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -O3 -fexceptions -fPIC -DNTIMER
+-  CF = $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -O3 -fexceptions -fPIC
++  CF = $(CFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -O3 -fexceptions -fPIC -fforce-addr -frename-registers -funroll-loops -Ofast
+ 
+ # ranlib, and ar, for generating libraries.  If you don't need ranlib,
+ # just change it to RANLAB = echo
