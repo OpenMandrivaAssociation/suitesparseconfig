@@ -7,7 +7,7 @@
 Summary:	Configuration file for SuiteSparse packages
 Name:		suitesparse-common-devel
 Version:	4.2.1
-Release:	2
+Release:	3
 License:	LGPLv2+
 Group:		Development/C
 Url:		http://www.cise.ufl.edu/research/sparse/UFconfig/
@@ -30,6 +30,8 @@ packages in SuiteSparse. And static library with few functions.
 %package -n	%{devname}
 Summary:	Configuration files for SuiteSparse packages
 Group:		Development/C
+Provides:	%{oname}-devel = %{EVRD}
+Requires:	%{libname} = %{EVRD}
 %rename		%{name}
 
 %description -n %{devname}
