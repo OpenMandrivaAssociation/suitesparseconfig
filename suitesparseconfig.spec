@@ -6,7 +6,7 @@
 Summary:	Configuration file for SuiteSparse packages
 Name:		suitesparseconfig
 Version:	4.2.1
-Release:	6
+Release:	7
 License:	LGPLv2+
 Group:		Development/C
 Url:		http://www.cise.ufl.edu/research/sparse/UFconfig/
