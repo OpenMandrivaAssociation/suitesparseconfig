@@ -10,7 +10,8 @@ Release:	1
 License:	LGPLv2+
 Group:		Development/C
 Url:		https://github.com/DrTimothyAldenDavis/SuiteSparse
-Source0:	https://github.com/DrTimothyAldenDavis/SuiteSparse/releases/%{NAME}-%{version}.tar.gz
+Source0:        https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/refs/tags/v5.10.1.tar.gz
+# Source0:	https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/%{NAME}-%{version}.tar.gz
 Patch0:		SuiteSparse_config-4.2.1-increase-default-optimizations.patch
 
 %description
