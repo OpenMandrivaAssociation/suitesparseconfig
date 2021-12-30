@@ -5,12 +5,12 @@
 
 Summary:	Configuration file for SuiteSparse packages
 Name:		suitesparseconfig
-Version:	4.2.1
-Release:	9
+Version:	5.8.1
+Release:	1
 License:	LGPLv2+
 Group:		Development/C
-Url:		http://www.cise.ufl.edu/research/sparse/UFconfig/
-Source0:	http://www.cise.ufl.edu/research/sparse/UFconfig/%{NAME}-%{version}.tar.gz
+Url:		https://github.com/DrTimothyAldenDavis/SuiteSparse
+Source0:	https://github.com/DrTimothyAldenDavis/SuiteSparse/archive/%{NAME}-%{version}.tar.gz
 Patch0:		SuiteSparse_config-4.2.1-increase-default-optimizations.patch
 
 %description
